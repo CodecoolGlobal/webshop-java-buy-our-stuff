@@ -2,7 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.DaoController;
+import com.codecool.shop.dao.DaoManager;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.ShippingInfo;
@@ -43,7 +43,7 @@ public class PaymentController extends HttpServlet {
             Util.handleError(req, resp, HttpServletResponse.SC_BAD_REQUEST, Error.MALFORMED_CART_ID);
             return;
         }
-        CartDao cartDataStore = DaoController.getCartDao();
+        CartDao cartDataStore = DaoManager.getCartDao();
         Cart cart = cartDataStore.find(cartId);
 
         String name = req.getParameter("name");

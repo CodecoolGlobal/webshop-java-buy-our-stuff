@@ -1,7 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.DaoController;
+import com.codecool.shop.dao.DaoManager;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.dao.LineItemDao;
@@ -24,7 +24,7 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        CartDao cartDataStore = DaoController.getCartDao();
+        CartDao cartDataStore = DaoManager.getCartDao();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -44,7 +44,7 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        LineItemDao lineItemDao = DaoController.getLineItemDao();
+        LineItemDao lineItemDao = DaoManager.getLineItemDao();
         int lineItemId = Integer.parseInt(req.getParameter("line-item-id"));
         LineItem lineItem = lineItemDao.find(lineItemId);
 

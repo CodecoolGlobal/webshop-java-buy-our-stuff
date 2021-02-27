@@ -2,7 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 
-import com.codecool.shop.dao.DaoController;
+import com.codecool.shop.dao.DaoManager;
 import com.codecool.shop.dao.DataNotFoundException;
 import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.dao.UserDao;
@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        UserDao userDao = DaoController.getUserDao();
+        UserDao userDao = DaoManager.getUserDao();
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");

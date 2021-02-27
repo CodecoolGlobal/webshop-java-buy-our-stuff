@@ -18,7 +18,7 @@ public class UserDaoJDBC extends BaseJDBC implements UserDao {
     public void add(User user) {
         String query = "INSERT INTO account (name, password, cart_id) VALUES (?, ?, ?);";
 
-        CartDao cartDao = DaoController.getCartDao();
+        CartDao cartDao = DaoManager.getCartDao();
         Cart cart = new Cart("USD");
         cartDao.add(cart);
 

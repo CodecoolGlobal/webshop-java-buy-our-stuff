@@ -82,7 +82,7 @@ public class LineItemDaoJDBC extends BaseJDBC implements LineItemDao {
                 int productId = rs.getInt("product_id");
                 int cartId = rs.getInt("cart_id");
                 int quantity = rs.getInt("quantity");
-                ProductDao productDao = DaoController.getProductDao();
+                ProductDao productDao = DaoManager.getProductDao();
                 Product product = productDao.find(productId);
 
                 LineItem lineItem = new LineItem(product, cartId, quantity);
@@ -98,7 +98,7 @@ public class LineItemDaoJDBC extends BaseJDBC implements LineItemDao {
 
     @Override
     public List<LineItem> getBy(Cart cart) {
-        ProductDao productDataStore = DaoController.getProductDao();
+        ProductDao productDataStore = DaoManager.getProductDao();
         int cartId = cart.getId();
         String query = "SELECT * FROM line_item WHERE cart_id = " + cartId + " ORDER BY id;";
         List<LineItem> result = new ArrayList<>();

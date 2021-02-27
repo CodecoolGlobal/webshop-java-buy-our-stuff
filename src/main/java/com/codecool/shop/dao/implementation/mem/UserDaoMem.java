@@ -1,7 +1,7 @@
 package com.codecool.shop.dao.implementation.mem;
 
 import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.DaoController;
+import com.codecool.shop.dao.DaoManager;
 import com.codecool.shop.dao.DataNotFoundException;
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.Cart;
@@ -9,9 +9,7 @@ import com.codecool.shop.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class UserDaoMem implements UserDao {
 
@@ -20,7 +18,7 @@ public class UserDaoMem implements UserDao {
     @Override
     public void add(User user) {
         if (isNameAvailable(user.getName())) {
-            CartDao cartDao = DaoController.getCartDao();
+            CartDao cartDao = DaoManager.getCartDao();
             Cart cart = new Cart();
             cartDao.add(cart);
 

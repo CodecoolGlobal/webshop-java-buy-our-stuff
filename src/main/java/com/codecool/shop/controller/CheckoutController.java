@@ -2,7 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.DaoController;
+import com.codecool.shop.dao.DaoManager;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
@@ -19,7 +19,7 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        CartDao cartDataStore = DaoController.getCartDao();
+        CartDao cartDataStore = DaoManager.getCartDao();
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 

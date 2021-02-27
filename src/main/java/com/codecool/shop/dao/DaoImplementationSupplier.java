@@ -1,5 +1,6 @@
 package com.codecool.shop.dao;
 
+import com.codecool.shop.dao.implementation.jdbc.*;
 import com.codecool.shop.dao.implementation.mem.*;
 import lombok.Getter;
 
@@ -32,7 +33,15 @@ public class DaoImplementationSupplier {
         printImplementation(daoType);
         switch (daoType) {
             case FILE: //TODO:
-            case JDBC: //TODO:
+            case JDBC:
+                return new DaoImplementationSupplier(
+                        new ProductDaoJDBC(),
+                        new ProductCategoryDaoJDBC(),
+                        new SupplierDaoJDBC(),
+                        new CartDaoJDBC(),
+                        new LineItemDaoJDBC(),
+                        new UserDaoJDBC()
+                );
             case MEMORY:
             default:
                 return new DaoImplementationSupplier(
@@ -42,7 +51,7 @@ public class DaoImplementationSupplier {
                     new CartDaoMem(),
                     new LineItemDaoMem(),
                     new UserDaoMem()
-            );
+                );
         }
     }
 

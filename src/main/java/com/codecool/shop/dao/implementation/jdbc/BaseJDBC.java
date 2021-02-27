@@ -5,13 +5,11 @@ import java.sql.*;
 
 public abstract class BaseJDBC {
 
-    private static final String DATABASE = "codecoolshop";
-    private static final String USERNAME = "hamargyuri";
-    private static final String PASSWORD = "adat";
+    private static final String DATABASE = ""; //todo: add your database name
+    private static final String USERNAME = ""; //todo: add your username
+    private static final String PASSWORD = ""; //todo: add your password
 
     Connection getConnection() throws SQLException {
-        Connection connection = DriverManager.getConnection(DATABASE, USERNAME, PASSWORD);
-        System.out.println("connected to db");
-        return connection;
+        return DriverManager.getConnection(DATABASE, USERNAME, PASSWORD);
     }
 }

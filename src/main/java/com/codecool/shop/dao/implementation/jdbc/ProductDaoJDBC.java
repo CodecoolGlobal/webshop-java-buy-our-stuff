@@ -114,8 +114,8 @@ public class ProductDaoJDBC extends BaseJDBC implements ProductDao {
     }
 
     private Product createProduct(ResultSet rs) throws SQLException {
-        ProductCategoryDao productCategoryDao = DaoController.getProductCategoryDao();
-        SupplierDao supplierDao = DaoController.getSupplierDao();
+        ProductCategoryDao productCategoryDao = DaoManager.getProductCategoryDao();
+        SupplierDao supplierDao = DaoManager.getSupplierDao();
 
         String name = rs.getString("name");
         String description = rs.getString("description");

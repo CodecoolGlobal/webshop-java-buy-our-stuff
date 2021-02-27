@@ -1,10 +1,8 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.dao.DaoController;
+import com.codecool.shop.dao.DaoManager;
 import com.codecool.shop.dao.LineItemDao;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.*;
 import java.math.BigDecimal;
@@ -28,7 +26,7 @@ public class Cart extends BaseModel {
     }
 
     public void add(Product product) {
-        LineItemDao lineItemDao = DaoController.getLineItemDao();
+        LineItemDao lineItemDao = DaoManager.getLineItemDao();
         if (product.getDefaultCurrency() == currency) {
             Optional<LineItem> match;
             match = getItem(product);
@@ -42,7 +40,7 @@ public class Cart extends BaseModel {
     }
 
     public void remove(Product product) {
-        LineItemDao lineItemDao = DaoController.getLineItemDao();
+        LineItemDao lineItemDao = DaoManager.getLineItemDao();
         Optional<LineItem> match;
         match = getItem(product);
         if (match.isPresent()) {
@@ -79,7 +77,7 @@ public class Cart extends BaseModel {
     }
 
     private Optional<LineItem> getItem(Product product) {
-        List<LineItem> items = DaoController.getLineItemDao().getBy(this);
+        List<LineItem> items = DaoManager.getLineItemDao().getBy(this);
         return items
                 .stream()
                 .filter(
@@ -89,7 +87,7 @@ public class Cart extends BaseModel {
     }
 
     private List<LineItem> items() {
-        return DaoController.getLineItemDao().getBy(this);
+        return DaoManager.getLineItemDao().getBy(this);
     }
 
     @Override
