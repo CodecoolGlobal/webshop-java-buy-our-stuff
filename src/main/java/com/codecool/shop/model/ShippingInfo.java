@@ -1,10 +1,12 @@
 package com.codecool.shop.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class ShippingInfo {
 
     private String name;
@@ -12,14 +14,6 @@ public class ShippingInfo {
     private String phoneNumber;
     private String billingAddress;
     private String shippingAddress;
-
-    public ShippingInfo(String name, String email, String phoneNumber, String billingAddress, String shippingAddress) {
-        this.name = name;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.billingAddress = billingAddress;
-        this.shippingAddress = shippingAddress;
-    }
 
     public String toString() {
         return String.format("%1$s={" +

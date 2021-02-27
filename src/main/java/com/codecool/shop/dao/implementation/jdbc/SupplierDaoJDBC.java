@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
+public class SupplierDaoJDBC extends BaseJDBC implements SupplierDao {
 
     @Override
     public void add(Supplier supplier) {

@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
+public class ProductDaoJDBC extends BaseJDBC implements ProductDao {
 
     @Override
     public void add(Product product) {

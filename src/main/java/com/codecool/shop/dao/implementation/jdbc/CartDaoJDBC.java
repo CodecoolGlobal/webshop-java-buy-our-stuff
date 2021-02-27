@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartDaoJDBC extends DaoJDBC implements CartDao {
+public class CartDaoJDBC extends BaseJDBC implements CartDao {
 
     @Override
     public void add(Cart cart) {

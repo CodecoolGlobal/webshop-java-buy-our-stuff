@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDao {
+public class ProductCategoryDaoJDBC extends BaseJDBC implements ProductCategoryDao {
 
     @Override
     public void add(ProductCategory category) {

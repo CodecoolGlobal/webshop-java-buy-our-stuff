@@ -8,34 +8,33 @@ import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserDaoMem implements UserDao {
 
-    private Map<User, String> users = new HashMap<>();
+    private final List<User> users = new ArrayList<>();
 
     @Override
-    public void add(String name, String password) {
-        if (isNameAvailable(name)) {
+    public void add(User user) {
+        if (isNameAvailable(user.getName())) {
             CartDao cartDao = DaoController.getCartDao();
-            Cart cart = new Cart("USD");
+            Cart cart = new Cart();
             cartDao.add(cart);
 
-            User user = new User(name, cart.getId());
+            user.setCartId(cart.getId());
             user.setId(users.size() + 1);
-            String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-            users.put(user, hashed);
+            users.add(user);
         }
     }
 
     @Override
     public User find(String name, String password) {
         return users
-                .keySet()
                 .stream()
-                .filter(user -> user.getName().equals(name)
-                        && BCrypt.checkpw(password, users.get(user)))
+                .filter(user -> user.getName().equals(name) && BCrypt.checkpw(password, user.getPassword()))
                 .findFirst()
                 .orElseThrow(() -> new DataNotFoundException("No such user"));
     }
@@ -43,7 +42,6 @@ public class UserDaoMem implements UserDao {
     @Override
     public boolean isNameAvailable(String name) {
         return users
-                .keySet()
                 .stream()
                 .map(User::getName)
                 .noneMatch(username -> username.equals(name));

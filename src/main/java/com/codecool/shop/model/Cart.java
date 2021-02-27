@@ -2,7 +2,9 @@ package com.codecool.shop.model;
 
 import com.codecool.shop.dao.DaoController;
 import com.codecool.shop.dao.LineItemDao;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.*;
 import java.math.BigDecimal;
@@ -15,6 +17,10 @@ public class Cart extends BaseModel {
 
     public Cart(String currencyString) {
         this.currency = Currency.getInstance(currencyString);
+    }
+
+    public Cart() {
+        this.currency = Currency.getInstance("USD");
     }
 
     public List<LineItem> getItems() {
@@ -72,15 +78,6 @@ public class Cart extends BaseModel {
                 .sum();
     }
 
-    public String toString() {
-        return String.format(
-                "items: %1$s, " +
-                        "currency: %2$s",
-                items(),
-                currency
-        );
-    }
-
     private Optional<LineItem> getItem(Product product) {
         List<LineItem> items = DaoController.getLineItemDao().getBy(this);
         return items
@@ -93,5 +90,10 @@ public class Cart extends BaseModel {
 
     private List<LineItem> items() {
         return DaoController.getLineItemDao().getBy(this);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("items: %1$s, currency: %2$s", items(), currency);
     }
 }

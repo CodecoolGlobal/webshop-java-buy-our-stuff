@@ -1,12 +1,16 @@
 package com.codecool.shop.dao;
 
 import com.codecool.shop.model.ProductCategory;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 
-class ProductCategoryDaoTest extends DaoTest {
+class ProductCategoryDaoTest {
+
+    @BeforeEach
+    void initData() {
+        DaoController.init();
+    }
 
     @Test
     void testAdd() {
@@ -46,5 +50,10 @@ class ProductCategoryDaoTest extends DaoTest {
         ProductCategoryDao productCategoryDao = DaoController.getProductCategoryDao();
         List<ProductCategory> productCategories = productCategoryDao.getAll();
         Assertions.assertEquals(productCategoryCount, productCategories.size());
+    }
+
+    @AfterAll
+    static void clearData() {
+        DaoController.clear();
     }
 }

@@ -5,6 +5,7 @@ import com.codecool.shop.dao.DaoController;
 import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.dao.UserDao;
 
+import com.codecool.shop.model.User;
 import com.codecool.shop.util.Util;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -45,7 +46,7 @@ public class RegisterController extends HttpServlet {
 
         if (isNameAvailable) {
             registerError = false;
-            userDao.add(username, password);
+            userDao.add(new User(username, password));
             resp.sendRedirect("/");
         } else {
             registerError = true;

@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineItemDaoJDBC extends DaoJDBC implements LineItemDao {
+public class LineItemDaoJDBC extends BaseJDBC implements LineItemDao {
 
     @Override
     public void add(LineItem lineItem) {

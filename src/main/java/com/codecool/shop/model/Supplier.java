@@ -1,10 +1,13 @@
 package com.codecool.shop.model;
 
-public class Supplier extends ProductModel {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-    public Supplier(String name, String description) {
-        super(name, description);
-    }
+@Getter
+@AllArgsConstructor
+public class Supplier extends BaseModel {
+    private final String name;
+    private final String description;
 
     public String toString() {
         return String.format("%1$s={" +

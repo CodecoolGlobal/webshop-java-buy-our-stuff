@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-class SupplierDaoTest extends DaoTest {
+class SupplierDaoTest {
 
     @Test
     void testAdd() {

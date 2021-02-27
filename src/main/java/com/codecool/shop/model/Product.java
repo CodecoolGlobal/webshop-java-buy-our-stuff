@@ -1,5 +1,6 @@
 package com.codecool.shop.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,9 +8,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
 
-@Getter @Setter
-public class Product extends ProductModel {
+@Getter
+@Setter
+public class Product extends BaseModel {
 
+    private String name;
+    private String description;
     private BigDecimal defaultPrice;
     private Currency defaultCurrency;
     private ProductCategory productCategory;
@@ -17,7 +21,8 @@ public class Product extends ProductModel {
 
 
     public Product(String name, BigDecimal defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
-        super(name, description);
+        this.name = name;
+        this.description = description;
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);

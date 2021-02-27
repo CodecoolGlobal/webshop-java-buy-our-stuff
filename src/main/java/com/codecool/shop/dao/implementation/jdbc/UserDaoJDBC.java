@@ -4,18 +4,18 @@ import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.User;
 import com.codecool.shop.util.Error;
+import com.codecool.shop.util.Util;
 import lombok.Cleanup;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDaoJDBC extends DaoJDBC implements UserDao {
+public class UserDaoJDBC extends BaseJDBC implements UserDao {
 
     @Override
-    public void add(String name, String password) {
+    public void add(User user) {
         String query = "INSERT INTO account (name, password, cart_id) VALUES (?, ?, ?);";
 
         CartDao cartDao = DaoController.getCartDao();
@@ -26,10 +26,8 @@ public class UserDaoJDBC extends DaoJDBC implements UserDao {
             @Cleanup Connection conn = getConnection();
             @Cleanup PreparedStatement stmt = conn.prepareStatement(query);
 
-            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-
-            stmt.setString(1, name);
-            stmt.setString(2, hashedPassword);
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getPassword());
             stmt.setInt(3, cart.getId());
             stmt.execute();
         } catch (SQLException e) {
@@ -47,8 +45,9 @@ public class UserDaoJDBC extends DaoJDBC implements UserDao {
 
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
-            if (rs.next() && BCrypt.checkpw(password, rs.getString("password"))) {
-                User user = new User(username, rs.getInt("cart_id"));
+            if (rs.next() && Util.checkPassword(password, rs.getString("password"))) {
+                User user = new User(username, password);
+                user.setCartId(rs.getInt("cart_id"));
                 user.setId(rs.getInt("id"));
                 return user;
             }

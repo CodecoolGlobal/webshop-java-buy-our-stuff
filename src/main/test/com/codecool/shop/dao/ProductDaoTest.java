@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
-class ProductDaoTest extends DaoTest {
+class ProductDaoTest {
 
     @Test
     void testAdd() {
@@ -19,7 +19,7 @@ class ProductDaoTest extends DaoTest {
         Supplier supplier = supplierDataStore.find(1);
         ProductCategory productCategory = productCategoryDataStore.find(1);
 
-        Product product = new Product("test", new BigDecimal(499.99), "USD",
+        Product product = new Product("test", new BigDecimal("499.99"), "USD",
                 "test", productCategory, supplier);
         ProductDao productDao = DaoController.getProductDao();
         productDao.add(product);

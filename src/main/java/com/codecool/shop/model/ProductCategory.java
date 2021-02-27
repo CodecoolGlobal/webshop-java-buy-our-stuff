@@ -1,17 +1,16 @@
 package com.codecool.shop.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
-public class ProductCategory extends ProductModel {
-
+@Getter
+@Setter
+@AllArgsConstructor
+public class ProductCategory extends BaseModel {
+    private String name;
+    private String description;
     private String department;
-
-    public ProductCategory(String name, String department, String description) {
-        super(name, description);
-        this.department = department;
-    }
 
     public String toString() {
         return String.format("%1$s={" +
