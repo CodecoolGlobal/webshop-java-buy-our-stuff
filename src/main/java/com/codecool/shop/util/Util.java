@@ -15,6 +15,6 @@ public class Util {
     }
 
     public static boolean checkPassword(String provided, String saved) {
-        return BCrypt.hashpw(provided, BCrypt.gensalt()).equals(saved);
+        return BCrypt.checkpw(provided, saved);
     }
 }
